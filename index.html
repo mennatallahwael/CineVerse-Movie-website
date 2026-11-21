@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CineVerse – Your ultimate destination for movies, trailers, and cinematic experiences. Discover popular and upcoming films." />
+  <title>CineVerse – Your Cinematic Universe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<!-- =========================================================
+     onload event: show welcome alert when page finishes loading
+     ========================================================= -->
+<body onload="welcomeMessage()">
+
+  <!-- =====================================================
+       NAVBAR
+       ===================================================== -->
+  <nav class="navbar">
+    <div class="logo">Cine<span>Verse</span></div>
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Nav links -->
+    <ul class="nav-links" id="navLinks">
+      <li>
+        <a class="nav-link active" id="navHome"
+           onclick="scrollToSection('hero'); setActiveNav(this)">Home</a>
+      </li>
+      <li>
+        <a class="nav-link" id="navPopular"
+           onclick="scrollToSection('popular'); setActiveNav(this)">Popular</a>
+      </li>
+      <li>
+        <a class="nav-link" id="navUpcoming"
+           onclick="scrollToSection('upcoming'); setActiveNav(this)">Upcoming</a>
+      </li>
+      <li>
+        <a class="nav-link" id="navContact"
+           onclick="scrollToSection('contact'); setActiveNav(this)">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- =====================================================
+       HERO SECTION
+       ===================================================== -->
+  <section class="hero" id="hero">
+    <!-- Decorative background -->
+    <div class="hero-bg"></div>
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Right-side cinematic image (decorative) -->
+    <div class="hero-image-wrap">
+      <img
+        src="posters/dune.png"
+        alt="Dune Part Two official poster" />
+      <div class="hero-image-overlay"></div>
+    </div>
+
+    <!-- Hero text content -->
+    <div class="hero-content">
+      <span class="hero-badge">🎬 Now Showing</span>
+
+      <h1 class="hero-title">
+        Dune:<br />
+        <span class="highlight">Part Two</span>
+      </h1>
+
+      <p class="hero-desc">
+        Paul Atreides unites with Chani and the Fremen while seeking revenge
+        against those who destroyed his family. A breathtaking sci-fi epic.
+      </p>
+
+      <div class="hero-meta">
+        <span class="meta-badge">2h 46m</span>
+        <span class="meta-badge">Sci-Fi / Adventure</span>
+        <span class="meta-badge">2024</span>
+        <span class="rating-badge">★ 8.5 / 10</span>
+      </div>
+
+      <div class="hero-buttons">
+        <!-- onclick event: changes button text using innerHTML -->
+        <button
+          class="btn-primary"
+          id="heroTrailerBtn"
+          onclick="watchTrailer('heroTrailerBtn')">
+          ▶ Watch Trailer
+        </button>
+
+        <!-- onclick event: shows booking status via innerHTML -->
+        <button
+          class="btn-outline"
+          onclick="bookNow('Dune: Part Two')">
+          🎟 Book Now
+        </button>
+      </div>
+
+      <!-- Booking feedback (controlled by bookNow() via getElementById) -->
+      <div id="bookingStatus"></div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       POPULAR MOVIES SECTION
+       ===================================================== -->
+  <section id="popular">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Popular <span>Movies</span></h2>
+        <span class="section-line"></span>
+      </div>
+      <button class="see-all" onclick="alert('Loading all popular movies…')">See All →</button>
+    </div>
+
+    <!-- Movie cards grid – onmouseover / onmouseout on each card -->
+    <div class="movies-grid">
+
+      <!-- Card 1 -->
+      <div class="movie-card"
+           onmouseover="mouseOver(this)"
+           onmouseout="mouseOut(this)">
+        <div class="movie-card-img">
+          <img
+            src="posters/oppenheimer.png"
+            alt="Oppenheimer official movie poster" />
+          <div class="movie-card-overlay"></div>
+          <span class="movie-genre-tag">Drama</span>
+          <span class="movie-rating">★ 8.9</span>
+        </div>
+        <div class="movie-card-body">
+          <h3 class="movie-card-title">Oppenheimer</h3>
+          <p class="movie-card-meta">2023 · 3h 0m · Christopher Nolan</p>
+          <button
+            class="btn-trailer"
+            id="trailerBtn1"
+            onclick="watchTrailer('trailerBtn1')">
+            ▶ Watch Trailer
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="movie-card"
+           onmouseover="mouseOver(this)"
+           onmouseout="mouseOut(this)">
+        <div class="movie-card-img">
+          <img
+            src="posters/inception.png"
+            alt="Inception official movie poster" />
+          <div class="movie-card-overlay"></div>
+          <span class="movie-genre-tag">Sci-Fi</span>
+          <span class="movie-rating">★ 8.8</span>
+        </div>
+        <div class="movie-card-body">
+          <h3 class="movie-card-title">Inception</h3>
+          <p class="movie-card-meta">2010 · 2h 28m · Christopher Nolan</p>
+          <button
+            class="btn-trailer"
+            id="trailerBtn2"
+            onclick="watchTrailer('trailerBtn2')">
+            ▶ Watch Trailer
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="movie-card"
+           onmouseover="mouseOver(this)"
+           onmouseout="mouseOut(this)">
+        <div class="movie-card-img">
+          <img
+            src="posters/interstellar.png"
+            alt="Interstellar official movie poster" />
+          <div class="movie-card-overlay"></div>
+          <span class="movie-genre-tag">Adventure</span>
+          <span class="movie-rating">★ 8.7</span>
+        </div>
+        <div class="movie-card-body">
+          <h3 class="movie-card-title">Interstellar</h3>
+          <p class="movie-card-meta">2014 · 2h 49m · Christopher Nolan</p>
+          <button
+            class="btn-trailer"
+            id="trailerBtn3"
+            onclick="watchTrailer('trailerBtn3')">
+            ▶ Watch Trailer
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="movie-card"
+           onmouseover="mouseOver(this)"
+           onmouseout="mouseOut(this)">
+        <div class="movie-card-img">
+          <img
+            src="posters/batman.png"
+            alt="The Batman official movie poster" />
+          <div class="movie-card-overlay"></div>
+          <span class="movie-genre-tag">Action</span>
+          <span class="movie-rating">★ 7.9</span>
+        </div>
+        <div class="movie-card-body">
+          <h3 class="movie-card-title">The Batman</h3>
+          <p class="movie-card-meta">2022 · 2h 56m · Matt Reeves</p>
+          <button
+            class="btn-trailer"
+            id="trailerBtn4"
+            onclick="watchTrailer('trailerBtn4')">
+            ▶ Watch Trailer
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="movie-card"
+           onmouseover="mouseOver(this)"
+           onmouseout="mouseOut(this)">
+        <div class="movie-card-img">
+          <img
+            src="posters/avatar.png"
+            alt="Avatar The Way of Water official movie poster" />
+          <div class="movie-card-overlay"></div>
+          <span class="movie-genre-tag">Fantasy</span>
+          <span class="movie-rating">★ 8.1</span>
+        </div>
+        <div class="movie-card-body">
+          <h3 class="movie-card-title">Avatar: The Way of Water</h3>
+          <p class="movie-card-meta">2022 · 3h 12m · James Cameron</p>
+          <button
+            class="btn-trailer"
+            id="trailerBtn5"
+            onclick="watchTrailer('trailerBtn5')">
+            ▶ Watch Trailer
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="movie-card"
+           onmouseover="mouseOver(this)"
+           onmouseout="mouseOut(this)">
+        <div class="movie-card-img">
+          <img
+            src="posters/topgun.png"
+            alt="Top Gun Maverick official movie poster" />
+          <div class="movie-card-overlay"></div>
+          <span class="movie-genre-tag">Action</span>
+          <span class="movie-rating">★ 8.3</span>
+        </div>
+        <div class="movie-card-body">
+          <h3 class="movie-card-title">Top Gun: Maverick</h3>
+          <p class="movie-card-meta">2022 · 2h 10m · Joseph Kosinski</p>
+          <button
+            class="btn-trailer"
+            id="trailerBtn6"
+            onclick="watchTrailer('trailerBtn6')">
+            ▶ Watch Trailer
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       UPCOMING MOVIES SECTION
+       ===================================================== -->
+  <section id="upcoming">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Upcoming <span>Releases</span></h2>
+        <span class="section-line"></span>
+      </div>
+      <button class="see-all" onclick="alert('Loading all upcoming movies…')">See All →</button>
+    </div>
+
+    <div class="upcoming-grid">
+
+      <!-- Upcoming Card 1 -->
+      <div class="upcoming-card"
+           onmouseover="upcomingOver(this)"
+           onmouseout="upcomingOut(this)">
+        <div class="upcoming-card-img">
+          <img
+            src="posters/joker2.png"
+            alt="Joker Folie a Deux official movie poster" />
+        </div>
+        <div class="upcoming-card-body">
+          <div>
+            <h3 class="upcoming-title">Joker: Folie à Deux</h3>
+            <p class="upcoming-meta">Crime / Musical · Todd Phillips</p>
+            <p class="release-date">📅 Oct 4, 2024</p>
+          </div>
+          <button class="btn-notify" onclick="alert('🔔 You will be notified about Joker: Folie à Deux!')">
+            🔔 Notify Me
+          </button>
+        </div>
+      </div>
+
+      <!-- Upcoming Card 2 -->
+      <div class="upcoming-card"
+           onmouseover="upcomingOver(this)"
+           onmouseout="upcomingOut(this)">
+        <div class="upcoming-card-img">
+          <img
+            src="posters/deadpool.png"
+            alt="Deadpool and Wolverine official movie poster" />
+        </div>
+        <div class="upcoming-card-body">
+          <div>
+            <h3 class="upcoming-title">Deadpool & Wolverine</h3>
+            <p class="upcoming-meta">Action / Comedy · Shawn Levy</p>
+            <p class="release-date">📅 Jul 26, 2024</p>
+          </div>
+          <button class="btn-notify" onclick="alert('🔔 You will be notified about Deadpool & Wolverine!')">
+            🔔 Notify Me
+          </button>
+        </div>
+      </div>
+
+      <!-- Upcoming Card 3 -->
+      <div class="upcoming-card"
+           onmouseover="upcomingOver(this)"
+           onmouseout="upcomingOut(this)">
+        <div class="upcoming-card-img">
+          <img
+            src="posters/apes.png"
+            alt="Kingdom of the Planet of the Apes official movie poster" />
+        </div>
+        <div class="upcoming-card-body">
+          <div>
+            <h3 class="upcoming-title">Kingdom of the Planet of the Apes</h3>
+            <p class="upcoming-meta">Sci-Fi / Action · Wes Ball</p>
+            <p class="release-date">📅 May 10, 2024</p>
+          </div>
+          <button class="btn-notify" onclick="alert('🔔 You will be notified about Kingdom of the Planet of the Apes!')">
+            🔔 Notify Me
+          </button>
+        </div>
+      </div>
+
+      <!-- Upcoming Card 4 -->
+      <div class="upcoming-card"
+           onmouseover="upcomingOver(this)"
+           onmouseout="upcomingOut(this)">
+        <div class="upcoming-card-img">
+          <img
+            src="posters/alien.png"
+            alt="Alien Romulus official movie poster" />
+        </div>
+        <div class="upcoming-card-body">
+          <div>
+            <h3 class="upcoming-title">Alien: Romulus</h3>
+            <p class="upcoming-meta">Horror / Sci-Fi · Fede Álvarez</p>
+            <p class="release-date">📅 Aug 16, 2024</p>
+          </div>
+          <button class="btn-notify" onclick="alert('🔔 You will be notified about Alien: Romulus!')">
+            🔔 Notify Me
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       CONTACT SECTION
+       ===================================================== -->
+  <section id="contact">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Get in <span>Touch</span></h2>
+        <span class="section-line"></span>
+      </div>
+    </div>
+
+    <div class="contact-wrapper">
+      <!-- Info panel -->
+      <div class="contact-info">
+        <h3>We'd love to hear from you!</h3>
+        <p>
+          Have a question about a movie, a booking issue, or just want to share
+          your thoughts? Drop us a message and our team will get back to you.
+        </p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <span>123 Cinema Blvd, Hollywood, CA 90028</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <span>+1 (800) CINE-VERSE</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📧</div>
+          <span>hello@cineverse.com</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🕐</div>
+          <span>Mon – Sun: 10:00 AM – 11:00 PM</span>
+        </div>
+      </div>
+
+      <!-- Contact form with onsubmit validation -->
+      <form
+        class="contact-form"
+        id="contactForm"
+        onsubmit="return validateForm()">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">Full Name *</label>
+            <input
+              type="text"
+              id="contactName"
+              class="form-input"
+              placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address *</label>
+            <input
+              type="email"
+              id="contactEmail"
+              class="form-input"
+              placeholder="john@example.com" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contactSubject">Subject</label>
+          <input
+            type="text"
+            id="contactSubject"
+            class="form-input"
+            placeholder="Movie enquiry, booking, feedback…" />
+        </div>
+
+        <div class="form-group">
+          <label for="contactMessage">Message *</label>
+          <textarea
+            id="contactMessage"
+            class="form-input"
+            placeholder="Write your message here…"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">🚀 Send Message</button>
+
+        <!-- Success feedback (controlled via getElementById in validateForm()) -->
+        <div id="formSuccess"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer id="footer">
+    <div class="footer-top">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="logo">Cine<span>Verse</span></div>
+        <p>Your ultimate destination for movies, trailers, and the cinematic universe you love.</p>
+        <div class="footer-socials">
+          <div class="social-btn" onclick="alert('Opening Facebook…')">f</div>
+          <div class="social-btn" onclick="alert('Opening Twitter…')">𝕏</div>
+          <div class="social-btn" onclick="alert('Opening Instagram…')">📷</div>
+          <div class="social-btn" onclick="alert('Opening YouTube…')">▶</div>
+        </div>
+      </div>
+
+      <!-- Movies -->
+      <div class="footer-col">
+        <h4>Movies</h4>
+        <ul>
+          <li onclick="scrollToSection('popular')">Now Showing</li>
+          <li onclick="scrollToSection('upcoming')">Coming Soon</li>
+          <li onclick="alert('Opening Top Rated…')">Top Rated</li>
+          <li onclick="alert('Opening Genres…')">Genres</li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li onclick="alert('Opening About Us…')">About Us</li>
+          <li onclick="alert('Opening Careers…')">Careers</li>
+          <li onclick="alert('Opening Press…')">Press</li>
+          <li onclick="scrollToSection('contact')">Contact</li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li onclick="alert('Opening Privacy Policy…')">Privacy Policy</li>
+          <li onclick="alert('Opening Terms of Service…')">Terms of Service</li>
+          <li onclick="alert('Opening Cookie Policy…')">Cookie Policy</li>
+          <li onclick="alert('Opening DMCA…')">DMCA</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 <span>CineVerse</span>. All rights reserved.</p>
+      <p>Made with <span>❤</span> for movie lovers everywhere.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
